@@ -1,7 +1,3 @@
 {
-    "token": "OTM5ODE1MDc0OTc2MTMzMTcw.Yf-U_g.LmsEqhuS7gkMuzdUNHYFNhCobU4",
-    "Database": "mongodb+srv://redfly:Pegilauf24..@cluster0.vysss.mongodb.net/Cluster0?retryWrites=true&w=majority",
-    "prefix":"!"
+    "prefix": "!"
 }
-    
-

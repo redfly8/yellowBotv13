@@ -4,7 +4,7 @@ const client = new Client({ intents: 32767 })
 
 
 const botConfig = require('./config.json');
-const token = botConfig.token;
+
 
 const { promisify } = require("util")
 const Ascii = require("ascii-table");
@@ -22,4 +22,4 @@ require("./handlers/Commands")(client);
 require("./handlers/Buttons")(client, PG);
 
 
-client.login(token);
+client.login();
