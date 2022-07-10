@@ -1,3 +1,4 @@
+const keepAlive = require(`./server`)
 const { Client, Collection } = require("discord.js")
 const client = new Client({ intents: 32767 })
 
@@ -22,4 +23,5 @@ require("./handlers/Commands")(client);
 require("./handlers/Buttons")(client, PG);
 
 
-client.login();
+client.login(process.env.token);
+keepAlive();
