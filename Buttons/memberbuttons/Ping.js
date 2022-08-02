@@ -1,10 +1,10 @@
 const { Client, CommandInteraction } = require("discord.js")
+const CONFIG = require('../../Structures/config.json')
 
 
 
 module.exports = {
     id: "Ping",
-    permission: "BAN_MEMBERS",
     /**
      * 
      * @param {CommandInteraction} interaction 
@@ -12,9 +12,10 @@ module.exports = {
      */
 
     execute(interaction, client) {
-        const pingrole = interaction.guild.roles.cache.get('931644626031509584');
+        const pingroleid = CONFIG.PINGROLEID;
+        const pingrole = interaction.guild.roles.cache.get(pingroleid);
 
-        if (interaction.member.roles.cache.has('931644626031509584')) {
+        if (interaction.member.roles.cache.has(pingroleid)) {
             interaction.reply({ content: "You now wont be notified if someone needs help in game anymore.", ephemeral: true })
             interaction.member.roles.remove(pingrole);
         } else {

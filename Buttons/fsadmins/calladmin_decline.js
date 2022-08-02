@@ -12,7 +12,7 @@ module.exports = {
 
     execute(interaction, client) {
         const embed = interaction.message.embeds[0];
-        interaction.message.edit({ embeds: [embed.setColor("B06B6B")], components: [] })
+        interaction.message.edit({ embeds: [embed.setColor("B06B6B").setDescription(`❌  declined by ${interaction.user}`)], components: [] })
 
     }
 }

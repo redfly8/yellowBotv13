@@ -1,0 +1,3 @@
+- DCREPID: Id of the channel you want your discord infraction reports infraction
+- MEMBERROLEID: Id of the role you want the bot to auto assign if a member joins. If you do not want this feature, just leave it blank.
+- DCADMINROLEID: Id of the role you want to be notified for any discord banning/ kicking issues (for instance someone trying to ban people without having sufficient permissions.)

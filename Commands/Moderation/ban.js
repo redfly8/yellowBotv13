@@ -1,6 +1,7 @@
 const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 const { db } = require("../../Models/infractions");
 const DB = require('../../Models/infractions');
+const CONFIG = require('../../Structures/config.json')
 
 
 module.exports = {
@@ -51,7 +52,9 @@ module.exports = {
 
 
     async execute(interaction, client) {
-        const repchannel = client.channels.cache.get("957360683924742204")
+
+        const repchannel = client.channels.cache.get(CONFIG.DCREPID)
+
         const { options, guild, member } = interaction;
 
 
@@ -68,22 +71,27 @@ module.exports = {
             .setColor("DARK_GREEN");
 
         if (interaction.member.id == Target.id) {
-            Failembed.setDescription("❌ You can not ban yourself.")
+            Failembed.setDescription("You can not ban yourself.")
             return interaction.reply({ embeds: [Failembed] });
         }
         if (Target.roles.highest.position > interaction.member.roles.highest.position) {
-            Failembed.setDescription("❌You can not ban someone with a higher role.")
+            Failembed.setDescription("You can not ban someone with a higher role.")
             return interaction.reply({ embeds: [Failembed] });
         }
 
         if (Target.permissions.has("BAN_MEMBERS")) {
-            Failembed.setDescription("❌You can not ban someone with banning perms.")
+            Failembed.setDescription("Out of security reasons you can not ban someone with banning perms using this bot.")
             return interaction.reply({ embeds: [Failembed] });
         }
 
         if (!interaction.member.permissions.has("BAN_MEMBERS")) {
-            Failembed.setDescription("you don't have those perks.")
+            Failembed.setDescription("You do not have banning permissions. Don't try to (ab)use such moderation tools or you will be banned!");
+            repchannel.send({ content: `<@&${CONFIG.DCADMINROLEID}>,${interaction.user} (${interaction.user.tag}) just tried to BAN ${Target} with reason ${Reason} but did not have sufficient permissions.` })
             return interaction.reply({ embeds: [Failembed] })
+        }
+        if (Target.user.tag == client.user.tag) {
+            Failembed.setDescription("You can't ban this bot using this bot... If you want to remove it, please use the built in kicking or banning function.");
+            return interaction.reply({ embeds: [Failembed], ephemeral: true })
         }
 
         Succembed.addFields(
@@ -91,57 +99,25 @@ module.exports = {
             { name: "Target:", value: `${Target}` },
             { name: "Reason:", value: `${Reason}` },
         )
-        Succembed.setTitle(`⛔⛔⛔ **Ban** ⛔⛔⛔`)
+        Succembed.setTitle(`⛔ **Ban** ⛔`)
 
-        DB.findOne({ GuildID: guild.id, UserID: Target.id }, async (err, data) => {
-            if (err) throw err;
-            if (!data || !data.BanData) {
-                data = new DB({
-                    GuildID: guild.id,
-                    UserID: Target.id,
-                    BanData: [
-                        {
-                            ExecuterID: member.id,
-                            ExecuterTag: member.user.tag,
-                            TargetID: Target.id,
-                            TargetTag: Target.user.tag,      //HERE
-                            Reason: Reason,
-                            Date: parseInt(interaction.createdTimestamp / 1000)
-                        }
 
-                    ]
-                })
-            } else {
-                const BanDataObject = {
-
-                    ExecuterID: member.id,
-                    ExecuterTag: member.user.tag,
-                    TargetID: Target.id,
-                    TargetTag: Target.user.tag,      //HERE
-                    Reason: Reason,
-                    Date: parseInt(interaction.createdTimestamp / 1000)
-
-                }
-                data.BanData.push(BanDataObject)
-            }
-            data.save()
-        });//db => DB
 
 
 
 
 
         try {
-            let banmachine = await Target.send(`You have been **banned** from ${interaction.guild.name} by ${interaction.user.tag} for ${Reason}.`);
+            let banmachine = await Target.send(`You have been banned from ${interaction.guild.name} by ${interaction.user.tag} for ${Reason}.`);
             Target.ban({ days: Msgdel, reason: Reason })
-            Succembed.setFooter(`\nThis info was also sent to the user.`)
+            Succembed.setFooter(`✅This info was also sent to the user.✅`)
 
 
 
 
         } catch {
             Target.ban({ days: Msgdel, reason: Reason })
-            Succembed.setFooter(`\nThis info was not sent to the user.`)
+            Succembed.setFooter(`❗This info was not sent to the user since the DM could not be sent.❗`)
 
 
 

@@ -1,4 +1,5 @@
 const { CommandInteraction, MessageEmbed, Client, MessageActionRow, MessageButton } = require("discord.js");
+const CONFIG = require('../../Structures/config.json');
 
 
 
@@ -21,8 +22,8 @@ module.exports = {
 
 
         {
-            name: "player",
-            description: "Tell the admin who is breaking rules (if not needed just type X)",
+            name: "playername",
+            description: "Tell the admin the name of the person breaking rules.",
             type: "STRING",
             required: true
         },
@@ -45,7 +46,8 @@ module.exports = {
 
         const Description = interaction.options.getString("description");
         const Player = interaction.options.getString("player")
-        const role = interaction.guild.roles.cache.get("923173795982901268")
+        const role = interaction.guild.roles.cache.get(CONFIG.FSADMINID)
+        const channel = client.channels.cache.get(CONFIG.TROLLREPCHANID)
         const response = new MessageEmbed()
             .setTitle(`❗A user (${interaction.user.tag}) needs help:`)
             .setColor("YELLOW")
@@ -58,8 +60,7 @@ module.exports = {
             );
 
 
-        //HERE
-        const channel = client.channels.cache.get("973649151227203584");
+
 
         const respembed = new MessageEmbed()
             .setTitle("✅ Success.")
@@ -82,7 +83,7 @@ module.exports = {
 
 
 
-        interaction.reply({ embeds: [respembed], ephemeral: false })
+        interaction.reply({ embeds: [respembed], ephemeral: true })
         channel.send({ embeds: [response], components: [row], content: `<@&${role.id}>` })
 
 
