@@ -1,4 +1,5 @@
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
+const CONFIG = require('../../Structures/config.json')
 
 module.exports = {
     name: "magic8",

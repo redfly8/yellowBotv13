@@ -1,10 +1,12 @@
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 const { connection } = require("mongoose");
 require("../../events/Client/ready")
+const CONFIG = require('../../Structures/config.json')
 
 module.exports = {
     name: "status",
     description: "Displays the status of the client and the database connection",
+    roleID:`${CONFIG.DEVROLEID}`,
 
     /**
      * 

@@ -1,10 +1,11 @@
 const { CommandInteraction, Client } = require("discord.js");
 const asciiTable = require("ascii-table");
+const CONFIG = require('../../Structures/config.json')
 
 module.exports = {
     name: "test",
     description: "Only for devs. Test a piece of code.",
-    permission: "ADMINISTRATOR",
+    roleID:`${CONFIG.DEVROLEID}`,
     options: [
         {
             name: "senderror",

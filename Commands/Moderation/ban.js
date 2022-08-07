@@ -8,6 +8,7 @@ module.exports = {
     name: "ban",
     description: "ban a member",
     permission: "ADMINISTRATOR",
+    roleID:`${CONFIG.DCADMINROLEID}`,
     options: [
         {
             name: "member",

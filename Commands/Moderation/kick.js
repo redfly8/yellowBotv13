@@ -7,6 +7,7 @@ module.exports = {
     name: "kick",
     description: "kicks a member and logs this.",
     permission: "KICK_MEMBERS",
+    roleID:`${CONFIG.DCADMINROLEID}`,
 
     options: [
         {

@@ -1,8 +1,10 @@
 const { MessageActionRow, MessageButton, CommandInteraction } = require("discord.js");
 const CONFIG = require('../../Structures/config.json');
+
 module.exports = {
     name: "ping",
     description: "sends a reply with the ping buttons.",
+    roleID:`${CONFIG.DCMODROLEID}`,
     /**
      * 
      * @param {CommandInteraction} interaction 

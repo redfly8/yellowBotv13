@@ -1,10 +1,12 @@
 const { CommandInteraction, MessageEmbed, Client } = require("discord.js");
 
 const { options } = require("nodemon/lib/config");
+const CONFIG = require('../../Structures/config.json')
 
 module.exports = {
     name: "suggest",
     description: "Create a suggestion",
+    roleID:`${CONFIG.DEVROLEID}`,
     options: [
         {
             name: "type",

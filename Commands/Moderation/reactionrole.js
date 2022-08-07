@@ -1,10 +1,11 @@
 const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 const nodemon = require("nodemon");
+const CONFIG = require('../../Structures/config.json')
 
 module.exports = {
     name: "reactionrole",
     description: "set up a reaction role message.",
-    permission: "ADMINISTRATOR",
+    roleID:`${CONFIG.DEVROLEID}`,
     options: [
         {
             name: "role",

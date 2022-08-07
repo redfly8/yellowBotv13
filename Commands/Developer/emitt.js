@@ -1,9 +1,10 @@
 const { CommandInteraction, Client } = require("discord.js");
+const CONFIG = require('../../Structures/config.json')
 
 module.exports = {
     name: "emitt",
     description: "Event emitter",
-    permission: "ADMINISTRATOR",
+    roleID:`${CONFIG.DEVROLEID}`,
     options: [
         {
             name: "event",

@@ -1,9 +1,11 @@
 const { CommandInteraction, MessageEmbed } = require("discord.js");
+const CONFIG = require('../../Structures/config.json')
 
 module.exports = {
     name: "clear",
     description: "Deletes a specified amout of messages from the bottom or from a specific user.",
     permission:"MANAGE_MESSAGES",
+    roleID:`${CONFIG.DCMODROLEID}`,
     options:[
         {
             name: "amount",

@@ -2,9 +2,11 @@ const { CommandInteraction, Client, MessageEmbed } = require("discord.js");
 const CONFIG = require('../../Structures/config.json');
 
 
+
 module.exports = {
   name: "rep",
   description: "make a ban report",
+  roleID: `${CONFIG.FSADMINID}`,
   options: [
     {
       name: "server",
