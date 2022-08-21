@@ -18,7 +18,7 @@ module.exports = {
     const Edited = newMessage.content.slice(0, Count) + (newMessage.content.lenght > Count ? " ..." : "");
 
     const Log = new MessageEmbed()
-      .sectColor("DARK_NAVY")
+      .setColor("DARK_NAVY")
       .setDescription(`🪵 A [message](${newMessage.url}) by ${newMessage.author} was **edited** in ${newMessage.channel}\n
         **Original**: \n ${Original} \n **Edited**:\n${Edited} `)
       .setFooter(`Member: ${newMessage.author.tag} | ID: ${newMessage.author.id}`);

@@ -21,9 +21,11 @@ client.buttons = new Collection();
 require("./handlers/Events")(client);
 require("./handlers/Commands")(client);
 require("./handlers/Buttons")(client, PG);
+console.log("this works")
 const token = process.env.token;
 
 client.login(`${token}`)
+console.log("The bottom works too...")
 
 
 keepAlive();
